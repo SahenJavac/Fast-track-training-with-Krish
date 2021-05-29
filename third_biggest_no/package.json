@@ -1,0 +1,12 @@
+{
+  "name": "third_biggest_no",
+  "version": "1.0.0",
+  "description": "Finding the 3rd biggest no in an array \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[CCustome Bubble Sorter",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sahen Liyanage",
+  "license": "ISC"
+}
