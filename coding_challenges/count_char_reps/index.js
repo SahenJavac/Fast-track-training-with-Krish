@@ -2,13 +2,14 @@ function countRepsOfChars(sentence) {
 
     var charMap = {};
     var ch, count;
+    let charArr = sentence.replace(/ /g, '').toLowerCase().split("");
+    
 
+    for (let i = 0; i < charArr.length; i++) {
 
-    for (let i = 0; i < sentence.length; ++i) {
+        if (charArr[i] != ' ') {
 
-        if (sentence.charAt(i) != ' ') {
-
-            ch = sentence.charAt(i);
+            ch = charArr[i];
             count = charMap[ch];
             charMap[ch] = count ? count + 1 : 1;
         }
@@ -20,5 +21,5 @@ function countRepsOfChars(sentence) {
 
 }
 
-var text = "This is the string which I use to test123";
+var text = "This is the string which I use to test";
 countRepsOfChars(text);
