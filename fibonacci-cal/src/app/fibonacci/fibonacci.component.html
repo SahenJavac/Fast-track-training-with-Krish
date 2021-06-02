@@ -1,0 +1,14 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        
+        <input type="number" class="fadeIn second" name="userInput" placeholder="Enter Number Here" #box>
+
+            <input type="button" class="fadeIn fourth" value="Calculate"  (click)="fibonacciCalculate(box.value)">
+           
+        <div id="formFooter">
+            <label for="exampleForm2">{{fibonacciValue}}</label>
+
+        </div>
+
+    </div>
+</div>
