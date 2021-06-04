@@ -1,0 +1,29 @@
+<head></head>
+
+<body>
+    <br><br>
+    <div class="container">
+        <div class="backdrop">
+            <div class="highlights"></div>
+
+        </div>
+        <textarea placeholder="Enter Text Here" #txtbox></textarea>
+    </div>
+    <button (click)="vowelSort(txtbox.value)">Show Vowels</button>
+    <br><br>
+    <table class="table" *ngIf="vowelWords.length">
+        <thead>
+            <tr>
+                <th scope="col">Vowel Words</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vowelWord of vowelWords">
+                <td>{{vowelWord}}</td>
+            </tr>
+           
+        </tbody>
+    </table>
+    <br>
+</body>
