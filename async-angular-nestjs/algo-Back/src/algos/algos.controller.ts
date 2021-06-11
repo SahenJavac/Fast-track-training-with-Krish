@@ -10,24 +10,29 @@ export class AlgosController {
 
     @Post('anagram')
     checkAnagram(@Body('firstWord') firstWord: string, @Body('secondWord') secondWord: string) {
-        const result = this.algoService.anagramCheck(firstWord,secondWord);
-        return {
+        const result = this.algoService.lengthMatch(firstWord, secondWord,this.algoService.characterMatch);
+        return result;
+        /* return {
             statusCode: HttpStatus.OK,
             message: 'Checking Sucessfull',
             result
-        }
+        } */
     }
 
     @Post('reps')
-    occurranceCalculate(@Body('sentence') sentence: string) {
-        return this.algoService.letterRepsCount(sentence);
+    async occurranceCalculate(@Body('sentence') sentence: string) {
+        let filtteredArray = await this.algoService.toArrayConvert(sentence);
+        const charMap = await this.algoService.letterRepsCount(filtteredArray)
+        return charMap;
     }
 
     @Post('numbers')
-    getLargestNo(@Body('numberArray') numberArray:number[],@Body('num')nNo:number) {
+    getLargestNo(@Body('numberArray') numberArray: number[], @Body('num') nNo: number) {
 
-       return this.algoService.findBiggestNo(numberArray,nNo);
-        
+        return this.algoService.arrayValidation(numberArray, nNo)
+            .then((numArray) => { return numArray })
+            .catch((e) => { return e })
+
 
     }
 

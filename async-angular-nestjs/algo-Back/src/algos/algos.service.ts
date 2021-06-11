@@ -3,37 +3,53 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AlgosService {
 
-    anagramCheck(wordOne: string, wordTwo: string) {
+    //Anagram check
+
+    //compare the length of two words
+    lengthMatch(wordOne: string, wordTwo: string, callBack) {
 
         if (wordOne.length != wordTwo.length) {
-            return false;
+            return false
         } else {
-
-            var wrd1aray = wordOne.split("").sort();
-            var wrd2aray = wordTwo.split("").sort();
-
-            for (let i = 0; i < wordOne.length; i++) {
-
-                if (wrd1aray[i] != wrd2aray[i]) {
-                    return false
-                }
-            }
-            return true;
+            return callBack(wordOne, wordTwo);
         }
+    }
+    //compare each character of two words
+    characterMatch(wordOne: string, wordTwo: string) {
+        var wrd1aray = wordOne.split("").sort();
+        var wrd2aray = wordTwo.split("").sort();
+
+        for (let i = 0; i < wordOne.length; i++) {
+
+            if (wrd1aray[i] != wrd2aray[i]) {
+                return false
+            }
+        }
+        return true
     }
 
 
+
+
+
+
     //Letter Repetition count
-    letterRepsCount(sentence: string) {
 
-        var charMap = {};
-        var ch, count;
-        let charArray = sentence.toLowerCase().split("");
+    //filter and put character into an array (async)
+    async toArrayConvert(sentence: string) {
+        let charArray = [];
+        charArray = sentence.replace(/[1234567890!@#$%^&*(),.?]/g, '').toLocaleLowerCase().split("");
+        return charArray
+    }
+    //Put the array into a char Map(character as key and reps as value) and return
+    async letterRepsCount(filteredArray: string[]) {
 
-        for (let i = 0; i < charArray.length; i++) {
+        let charMap = {};
+        let ch, count;
 
-            if (charArray[i] != ' ') {
-                ch = charArray[i];
+        for (let i = 0; i < filteredArray.length; i++) {
+            if (filteredArray[i] != ' ') {
+                ch = filteredArray[i];
                 count = charMap[ch];
                 charMap[ch] = count ? count + 1 : 1;
             }
@@ -43,8 +59,12 @@ export class AlgosService {
 
 
 
-    //Find largest nth number in array using promise
-    findBiggestNo(numberArray: number[], largestNth: number) {
+
+
+
+//Find largest nth number in array (Promise)
+    //validate the array
+    arrayValidation(numberArray: number[], largestNth: number) {
 
         return new Promise((resolve, reject) => {
             if (numberArray.length > 0) {
@@ -54,7 +74,7 @@ export class AlgosService {
             }
         })
     }
-
+    //callback method of promise
     arraySort(numberArray: number[], largestNth: number) {
 
         let uniqueArray = [];
@@ -68,12 +88,6 @@ export class AlgosService {
         })
         return numberArray[largestNth - 1]
     }
-
-
-
-
-
-
 
 
 }
