@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackEndService } from '../back-end.service';
 
+
 @Component({
   selector: 'app-array-filter',
   templateUrl: './array-filter.component.html',
@@ -8,8 +9,8 @@ import { BackEndService } from '../back-end.service';
 })
 export class ArrayFilterComponent implements OnInit {
 
-  received = false;
-  response: any = '';
+  labelTrigger:boolean = false
+  response: string = '';
 
   constructor(private service: BackEndService) { }
 
@@ -18,11 +19,10 @@ export class ArrayFilterComponent implements OnInit {
 
   onSave(paraOne: string, index: string) {
 
-    let noArray = paraOne.split(",")
-    this.service.arrayFilter(noArray, index).subscribe(response => {
-      console.log(response);
-      this.received = true;
+    let num = parseInt(index)
+    this.service.arrayFilter(paraOne, num).subscribe(response => {
       this.response = response;
+      this.labelTrigger = true
     },
       error => {
         console.log(error);

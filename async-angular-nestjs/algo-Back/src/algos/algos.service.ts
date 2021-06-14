@@ -16,8 +16,9 @@ export class AlgosService {
     }
     //compare each character of two words
     characterMatch(wordOne: string, wordTwo: string) {
-        var wrd1aray = wordOne.split("").sort();
-        var wrd2aray = wordTwo.split("").sort();
+
+        var wrd1aray = wordOne.toLowerCase().split("").sort();
+        var wrd2aray = wordTwo.toLowerCase().split("").sort();
 
         for (let i = 0; i < wordOne.length; i++) {
 
@@ -38,23 +39,24 @@ export class AlgosService {
     //filter and put character into an array (async)
     async toArrayConvert(sentence: string) {
         let charArray = [];
-        charArray = sentence.replace(/[1234567890!@#$%^&*(),.?]/g, '').toLocaleLowerCase().split("");
+        charArray = sentence.replace(/[1234567890!@#$%^&*(),.?]/g, '').toUpperCase().split("");
         return charArray
     }
+
     //Put the array into a char Map(character as key and reps as value) and return
     async letterRepsCount(filteredArray: string[]) {
 
-        let charMap = {};
+        let charObj = {};
         let ch, count;
 
         for (let i = 0; i < filteredArray.length; i++) {
             if (filteredArray[i] != ' ') {
                 ch = filteredArray[i];
-                count = charMap[ch];
-                charMap[ch] = count ? count + 1 : 1;
+                count = charObj[ch];
+                charObj[ch] = count ? count + 1 : 1;
             }
         }
-        return charMap
+        return charObj
     }
 
 
@@ -62,31 +64,34 @@ export class AlgosService {
 
 
 
-//Find largest nth number in array (Promise)
-    //validate the array
-    arrayValidation(numberArray: number[], largestNth: number) {
+
+
+
+    //Find largest nth number in array (Promise)
+    findBiggestNo(numberStr: string, largestNth: number) {
 
         return new Promise((resolve, reject) => {
-            if (numberArray.length > 0) {
-                resolve(this.arraySort(numberArray, largestNth))
+            if (numberStr.length > 0) {
+                resolve(this.arraySort(numberStr, largestNth))
             } else {
                 reject('No Elements in array')
             }
         })
     }
     //callback method of promise
-    arraySort(numberArray: number[], largestNth: number) {
+    arraySort(numberStr: string, largestNth: number) {
 
         let uniqueArray = [];
+        let numberArray = numberStr.split(',').map(Number)
 
         numberArray.sort((a, b) => a - b);
-
+        
         numberArray.forEach((element, index) => {
             if (numberArray.indexOf(element) === index) {
                 uniqueArray.push(element)
             }
         })
-        return numberArray[largestNth - 1]
+        return uniqueArray[largestNth - 1]
     }
 
 

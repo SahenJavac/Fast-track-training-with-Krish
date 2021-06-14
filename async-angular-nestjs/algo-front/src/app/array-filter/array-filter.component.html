@@ -1,29 +1,33 @@
 <div class="wrapper fadeInDown">
-    <div id="formContent">
-        
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
-              <!-- Tabs Titles -->
-          <br>
-              <!-- Tittle -->
-              <div class="fadeIn first">
-                <a class="underlineHover" href="#">Number Search</a>
-              </div>
-              <br>
-              <!-- Inputs -->
-              
-                <input type="text" id="firstInput" class="fadeIn second" name="login" placeholder="Enter Number Array" #inpt1 >
-                <input type="number" id="firstInput" class="fadeIn second" name="login" placeholder="Enter No" #inpt2 >
-                <input type="button" class="fadeIn fourth" value="Check" (click)='onSave(inpt1.value,inpt2.value)'>
-             
-          
-              
-              <div id="formFooter">
-                <a class="underlineHover" href="#">{{response}}</a>
-              </div>
-          
-            </div>
-          </div>
+  <div id="formContent">
 
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <br>
+        <!-- Tittle -->
+        <div class="fadeIn first">
+          <a class="underlineHover">Number Search</a>
+        </div>
+        <br>
+        <!-- Inputs -->
+
+        <input type="text" id="firstInput" class="fadeIn second" placeholder="Enter Numbers Here" #inpt1>
+        <br><br>
+        <input type="number" id="firstInput" class="fadeIn second" placeholder="Enter No" #inpt2>
+        <br><br>
+        <input type="button" class="fadeIn fourth" value="Check" (click)='onSave(inpt1.value,inpt2.value)'>
+
+
+
+        <div id="formFooter" *ngIf="labelTrigger">
+          <a class="underlineHover">Largest {{inpt2.value}}th Number is</a>
+          <br>
+          <a class="underlineHover">{{response}}</a>
+        </div>
+
+      </div>
     </div>
+
+  </div>
 </div>

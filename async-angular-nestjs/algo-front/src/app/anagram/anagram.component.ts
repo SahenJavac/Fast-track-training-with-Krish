@@ -8,31 +8,36 @@ import { BackEndService } from '../back-end.service';
 })
 export class AnagramComponent implements OnInit {
 
-received = false;
-response:any = '';
 
- 
-
-  
+  anagramState: boolean = false;
+  labelView: string = '';
 
   constructor(private service: BackEndService) { }
 
   ngOnInit(): void {
   }
 
-  
 
-  onSave(paraOne:string , paraTwo:string){
-    console.log(paraOne+ " " + paraTwo)
+  onSubmit(paraOne: string, paraTwo: string) {
 
-    this.service.checkAnagram(paraOne,paraTwo).subscribe(response => {
-      console.log(response);
-      this.received = true;
-      this.response = response.result;
-    },
-    error => {
-      console.log(error);
-    });
+    if (paraOne.length > 1 && paraTwo.length > 1) {
+      this.service.checkAnagram(paraOne, paraTwo).subscribe(response => {
+
+        this.anagramState = response;
+        if (this.anagramState == true) {
+          this.labelView = paraOne.toUpperCase() + " and " + paraTwo.toUpperCase() + " are Anagrams"
+        } else {
+          this.labelView = paraOne.toUpperCase() + " and " + paraTwo.toUpperCase() + " are not Anagrams"
+        }
+      },
+        error => {
+          console.log(error);
+        });
+
+    } else {
+      this.labelView = "Please enter valid words"
+    }
+
   }
 
 }

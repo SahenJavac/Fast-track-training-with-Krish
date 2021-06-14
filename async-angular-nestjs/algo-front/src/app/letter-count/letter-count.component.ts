@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackEndService } from '../back-end.service';
 
+
 @Component({
   selector: 'app-letter-count',
   templateUrl: './letter-count.component.html',
@@ -8,28 +9,25 @@ import { BackEndService } from '../back-end.service';
 })
 export class LetterCountComponent implements OnInit {
 
-  received = false;
-  response: any;
+  charValues: any = [];
 
   constructor(private service: BackEndService) { }
 
   ngOnInit(): void {
   }
 
-  onSave(sentence:string){
-    
+  onSubmit(sentence: string) {
+
     this.service.repsCount(sentence)
-    .subscribe(
-      response => {
-        console.log(response);
-        this.received = true;
-        this.response = response.result;
-      },
-      error => {
-        console.log(error);
-      });
+      .subscribe(
+        response => {
+          this.charValues = Object.entries(response).map(([k, v]) => ([k, v]));
 
-
+        },
+        error => {
+          console.log(error);
+        });
   }
+
 
 }

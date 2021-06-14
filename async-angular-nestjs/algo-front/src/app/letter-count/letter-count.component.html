@@ -1,29 +1,52 @@
 <div class="wrapper fadeInDown">
-    <div id="formContent">
-        
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
-              <!-- Tabs Titles -->
-          <br>
-              <!-- Tittle -->
-              <div class="fadeIn first">
-                <a class="underlineHover" href="#">Letter Counter</a>
-              </div>
-              <br>
-              <!-- Inputs -->
-              
-                <input type="text" id="firstInput" class="fadeIn second" name="login" placeholder="Enter Sentence Here" #inpt1 >
-                
-                <input type="button" class="fadeIn fourth" value="Check" (click)='onSave(inpt1.value)'>
-             
-          
-              
-              <div id="formFooter">
-                <a class="underlineHover" href="#">{{response}}</a>
-              </div>
-          
-            </div>
-          </div>
+  <div id="formContent">
 
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <br>
+        <!-- Tittle -->
+        <div class="fadeIn first">
+          <a class="underlineHover" >Letter Counter</a>
+        </div>
+        <br>
+        <!-- Inputs -->
+
+        <input type="text" id="firstInput" class="fadeIn second" placeholder="Enter Sentence Here" #inpt1>
+        <br><br>
+
+        <input type="button" class="fadeIn fourth" value="Count" (click)='onSubmit(inpt1.value)' >
+
+        <div id="formFooter">
+          <a class="underlineHover" *ngIf="charValues.length">Counting Complete</a>
+        </div>
+
+      </div>
     </div>
+
+  </div>
+<br><br>
+  <div>
+    <table class="table" *ngIf="charValues.length">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Letter</th>
+          <th scope="col">Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let charValue of charValues; index as i">  
+          <td>{{i+1}}</td>
+          <td>{{charValue[0]}}</td>
+          <td>{{charValue[1]}}</td>
+  
+        </tr>
+  
+      </tbody>
+    </table>
+  </div>
+
 </div>
+
+
